@@ -29,7 +29,7 @@ else:
     ar.say("Good Night!")
     print("Good Night!")
     ar.runAndWait()
-    
+
 print("I'M Listening...")
 ar.say("i am listening")
 ar.runAndWait()
