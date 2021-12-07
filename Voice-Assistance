@@ -1,0 +1,162 @@
+import speech_recognition as sr
+import pyttsx3
+import datetime
+import time
+import sys
+import wikipedia
+import webbrowser
+import os
+
+ar=pyttsx3.init()
+voices=ar.getProperty("voices")
+ar.setProperty("voices", voices[0].id)
+
+hour = int(datetime.datetime.now().hour)
+print("PYRUS GREETING.....")
+if hour>=0 and hour<12:
+    ar.say("Good Morning!")
+    print("Good Morning!")
+    ar.runAndWait()
+elif hour>=12 and hour<17:
+    ar.say("Good Afternoon!")
+    print("Good Afternoon!")
+    ar.runAndWait()
+elif hour>=17 and hour<20:
+    ar.say("Good Evening!")
+    print("Good Evening!")
+    ar.runAndWait()
+else:
+    ar.say("Good Night!")
+    print("Good Night!")
+    ar.runAndWait()
+    
+print("I'M Listening...")
+ar.say("i am listening")
+ar.runAndWait()
+print("YOUR QUERY PLZ...")
+ar.say("your query plzz")
+ar.runAndWait()
+
+while True:
+    #print(("YOUR QUERY PLZZ..."))
+    print(("YOUR TURN..."))
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        r.pause_threshold = 1
+        #print("YOU....")
+        audio=r.listen(source)
+        query=r.recognize_google(audio)
+        #name=r.recognize_google(audio)
+    try:
+        if query=="hello" or query=="hey":
+            print("YOU: ", query)
+            ar.say("hello, how are you")
+            print("PYRUS...")
+            ar.runAndWait()
+            ar.say("your next query")
+            ar.runAndWait()
+
+        elif query=="who are you" or query=="what is your name":
+            print("YOU: ", query)
+            ar.say("i am 'PYRUS' sir")
+            print("PYRUS...")
+            ar.runAndWait()
+            ar.say("your next query")
+            ar.runAndWait()
+        elif query=="what are you" or query=="what are your functioning":
+            print("YOU: ", query)
+            ar.say("i am a voice assistant, work on your commands, i give reply to instructions")
+            print("PYRUS...")
+            ar.runAndWait()
+            ar.say("your next query")
+            ar.runAndWait()
+
+        elif 'Wikipedia' in query:
+            ar.say("Searching"+query)
+            ar.runAndWait()
+            page_object=wikipedia.page(query)
+            results = wikipedia.summary(query, sentences=4)
+            ar.say("According to Wikipedia"+results)
+            print(page_object)
+            print(results)
+            ar.runAndWait()
+            ar.say("your next query")
+            ar.runAndWait()
+        elif 'Google' in query:
+            ar.say("opening google")
+            ar.runAndWait()
+            webbrowser.open("google.com")
+            ar.say("your next query")
+            ar.runAndWait()
+
+        elif 'open E drive' in query:
+            print("YOU: ", query)
+            ar.say("opening drive e")
+            ar.runAndWait()
+            drivePath = "E:\\PythonProject"
+            os.startfile(drivePath)
+            ar.say("your next query")
+            ar.runAndWait()
+        elif 'open D drive' in query:
+            print("YOU: ", query)
+            ar.say("opening drive d")
+            ar.runAndWait()
+            drivePath = "D:"
+            os.startfile(drivePath)
+            ar.say("your next query")
+            ar.runAndWait()
+        elif 'open C drive' in query:
+            print("YOU: ", query)
+            ar.say("opening drive c")
+            ar.runAndWait()
+            drivePath = "C:"
+            os.startfile(drivePath)
+            ar.say("your next query")
+            ar.runAndWait()
+
+        elif "how are you" in query:
+            print("YOU: ", query)
+            ar.say("i am fine")
+            print("PYRUS...")
+            ar.runAndWait()
+            ar.say("your next query")
+            ar.runAndWait()
+
+        elif "my name" in query:
+            ar.say("type your name please")
+            ar.runAndWait()
+            name = input("TYPE YOUR NAME: ")
+            ar.say("hello" + name)
+            print("PYRUS...")
+            ar.runAndWait()
+            ar.say("your next query")
+            ar.runAndWait()
+
+        elif "exit" in query:
+            print("YOU: ", query)
+            ar.say("ok, now i am exiting, thank you")
+            print("PYRUS...")
+            ar.runAndWait()
+            sys.exit()
+
+
+        elif "wait" in query:
+            print("YOU: ", query)
+            ar.say("ok waiting for 5 seconds")
+            ar.runAndWait()
+            time.sleep(5)
+            ar.say("your next query")
+            ar.runAndWait()
+        else:
+            print("YOU: ", query)
+            ar.say("sorry" +query+ "instruction is not inputed in my system")
+            print("PYRUS...")
+            ar.runAndWait()
+            ar.say("your next query")
+            ar.runAndWait()
+
+    except Exception as e:
+            print(e)
+            print("PYRUS...")
+            ar.say("say again")
+            ar.runAndWait()
