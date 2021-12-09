@@ -1,0 +1,6 @@
+import pyttsx3   #pip install pyttsx3(for module install):
+r=pyttsx3.init()
+r.say("hello")
+r.say("how are you")
+r.say("this is code for text to speech")
+r.runAndWait()
